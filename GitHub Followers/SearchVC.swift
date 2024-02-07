@@ -12,7 +12,11 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
+        usernameTextField.delegate = self
+        
         configureViews()
+        dismissKeyboardTapGuster()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -20,10 +24,26 @@ class SearchVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    func dismissKeyboardTapGuster() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func pushToFollowersListVC() {
+        guard isUsernameEnterd else {return}
+        
+        let followersVC = FollowersListVC()
+        followersVC.username = usernameTextField.text
+        followersVC.title = usernameTextField.text
+        navigationController?.pushViewController(followersVC, animated: true)
+    }
+    
     private func configureViews() {
         view.addSubview(logoImageView)
         view.addSubview(usernameTextField)
         view.addSubview(callToActionButton)
+        
+        callToActionButton.addTarget(self, action: #selector(pushToFollowersListVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
@@ -49,7 +69,19 @@ class SearchVC: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
     let usernameTextField = GFTextField()
+    var isUsernameEnterd: Bool {return !usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty}
+    
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
 }
 
+
+//MARK: - TextField Delegate
+
+extension SearchVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushToFollowersListVC()
+        return true
+    }
+}
