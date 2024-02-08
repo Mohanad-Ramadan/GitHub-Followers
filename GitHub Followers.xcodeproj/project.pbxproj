@@ -22,6 +22,8 @@
 		148D35792B7497BC00B3BFBA /* ViewController-EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D35782B7497BC00B3BFBA /* ViewController-EXT.swift */; };
 		148D357F2B74B4FB00B3BFBA /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D357E2B74B4FB00B3BFBA /* Follower.swift */; };
 		148D35822B74B57D00B3BFBA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D35812B74B57D00B3BFBA /* User.swift */; };
+		148D35842B74B93100B3BFBA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D35832B74B93100B3BFBA /* NetworkManager.swift */; };
+		148D35882B74C41700B3BFBA /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D35872B74C41700B3BFBA /* ErrorMessages.swift */; };
 		14E4ED3A2B73E9B500B76DAD /* FollowersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4ED392B73E9B500B76DAD /* FollowersListVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		148D35782B7497BC00B3BFBA /* ViewController-EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController-EXT.swift"; sourceTree = "<group>"; };
 		148D357E2B74B4FB00B3BFBA /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		148D35812B74B57D00B3BFBA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		148D35832B74B93100B3BFBA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		148D35872B74C41700B3BFBA /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		14E4ED392B73E9B500B76DAD /* FollowersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,11 +80,14 @@
 		143EE2432B72FE76001FB7B0 /* GitHub Followers */ = {
 			isa = PBXGroup;
 			children = (
+				148D35862B74C3BA00B3BFBA /* Utilities */,
 				148D357C2B74AFFE00B3BFBA /* Extensions */,
-				148D357B2B74AED400B3BFBA /* Custom views */,
+				148D35852B74B93600B3BFBA /* Managers */,
 				148D35802B74B50100B3BFBA /* Model */,
 				148D357A2B74AE9000B3BFBA /* Screens */,
+				148D357B2B74AED400B3BFBA /* Custom views */,
 				148D357D2B74B01100B3BFBA /* Support */,
+				143EE2522B72FE78001FB7B0 /* Info.plist */,
 			);
 			path = "GitHub Followers";
 			sourceTree = "<group>";
@@ -123,7 +130,6 @@
 				143EE2462B72FE76001FB7B0 /* SceneDelegate.swift */,
 				143EE24D2B72FE78001FB7B0 /* Assets.xcassets */,
 				143EE24F2B72FE78001FB7B0 /* LaunchScreen.storyboard */,
-				143EE2522B72FE78001FB7B0 /* Info.plist */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -135,6 +141,22 @@
 				148D35812B74B57D00B3BFBA /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		148D35852B74B93600B3BFBA /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				148D35832B74B93100B3BFBA /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		148D35862B74C3BA00B3BFBA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				148D35872B74C41700B3BFBA /* ErrorMessages.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				148D35882B74C41700B3BFBA /* ErrorMessages.swift in Sources */,
 				143EE2492B72FE76001FB7B0 /* SearchVC.swift in Sources */,
 				143EE2452B72FE76001FB7B0 /* AppDelegate.swift in Sources */,
 				14E4ED3A2B73E9B500B76DAD /* FollowersListVC.swift in Sources */,
@@ -219,6 +242,7 @@
 				143EE2592B7309B4001FB7B0 /* MainTabBarController.swift in Sources */,
 				148D35732B7486D200B3BFBA /* GFTitleLabel.swift in Sources */,
 				143EE2472B72FE76001FB7B0 /* SceneDelegate.swift in Sources */,
+				148D35842B74B93100B3BFBA /* NetworkManager.swift in Sources */,
 				143EE25F2B731D3D001FB7B0 /* GFTextField.swift in Sources */,
 				148D35752B74894300B3BFBA /* GFBodyLabel.swift in Sources */,
 			);
