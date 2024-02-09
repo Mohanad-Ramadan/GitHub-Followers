@@ -18,4 +18,14 @@ extension UIViewController {
         }
     }
     
+    func presentDefaultError() {
+        let alertVC = GFAlertVC(alertTitle: "Something Went Wrong",
+                                messageText: "We were unable to complete your task at this time. Please try again.",
+                                buttonTitle: "Ok")
+        alertVC.modalPresentationStyle  = .overFullScreen
+        alertVC.modalTransitionStyle    = .crossDissolve
+        present(alertVC, animated: true)
+    }
+    
+    
 }
