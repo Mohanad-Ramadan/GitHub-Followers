@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14001C932B771B38009AF475 /* FollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14001C922B771B38009AF475 /* FollowersCell.swift */; };
+		14001C932B771B38009AF475 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14001C922B771B38009AF475 /* FollowerCell.swift */; };
 		14001C952B771D9B009AF475 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14001C942B771D9B009AF475 /* GFAvatarImageView.swift */; };
 		143EE2452B72FE76001FB7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EE2442B72FE76001FB7B0 /* AppDelegate.swift */; };
 		143EE2472B72FE76001FB7B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EE2462B72FE76001FB7B0 /* SceneDelegate.swift */; };
@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		14001C922B771B38009AF475 /* FollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCell.swift; sourceTree = "<group>"; };
+		14001C922B771B38009AF475 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		14001C942B771D9B009AF475 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		143EE2412B72FE76001FB7B0 /* GitHub Followers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub Followers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		143EE2442B72FE76001FB7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		14001C912B771B1A009AF475 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				14001C922B771B38009AF475 /* FollowersCell.swift */,
+				14001C922B771B38009AF475 /* FollowerCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -246,7 +246,7 @@
 				14001C952B771D9B009AF475 /* GFAvatarImageView.swift in Sources */,
 				148D35882B74C41700B3BFBA /* ErrorMessages.swift in Sources */,
 				143EE2492B72FE76001FB7B0 /* SearchVC.swift in Sources */,
-				14001C932B771B38009AF475 /* FollowersCell.swift in Sources */,
+				14001C932B771B38009AF475 /* FollowerCell.swift in Sources */,
 				143EE2452B72FE76001FB7B0 /* AppDelegate.swift in Sources */,
 				14E4ED3A2B73E9B500B76DAD /* FollowersListVC.swift in Sources */,
 				143EE25D2B731BEF001FB7B0 /* GFButton.swift in Sources */,
