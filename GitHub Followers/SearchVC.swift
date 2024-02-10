@@ -12,10 +12,9 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
-        usernameTextField.delegate = self
-        
         configureViews()
+        applyConstraints()
+        
         dismissKeyboardTapGuster()
     }
     
@@ -44,10 +43,13 @@ class SearchVC: UIViewController {
     private func configureViews() {
         view.addSubview(logoImageView)
         view.addSubview(usernameTextField)
+        usernameTextField.delegate = self
         view.addSubview(callToActionButton)
         
         callToActionButton.addTarget(self, action: #selector(pushToFollowersListVC), for: .touchUpInside)
-        
+    }
+    
+    func applyConstraints(){
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
