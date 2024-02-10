@@ -13,22 +13,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        standardTabBarApperance()
+        return true
+    }
+    
+    func standardTabBarApperance() {
         if #available(iOS 15, *) {
-            let navigationBarAppearance = UINavigationBarAppearance()
             let tabBarAppearance = UITabBarAppearance()
-            
-            navigationBarAppearance.configureWithOpaqueBackground()
             tabBarAppearance.configureWithOpaqueBackground()
-            
-            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UITabBar.appearance().standardAppearance = tabBarAppearance
-            
-            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
             UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
-        
-        return true
     }
 
     // MARK: UISceneSession Lifecycle
