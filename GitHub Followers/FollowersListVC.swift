@@ -27,7 +27,7 @@ class FollowersListVC: UIViewController {
     }
     
     func configureViews(){
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionThreeColumnFlowLayout())
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.collectionThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.identifier)
@@ -52,39 +52,25 @@ class FollowersListVC: UIViewController {
         }
     }
     
-    func collectionThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
-        let width = view.bounds.width
-        let padding: CGFloat = 12
-        let minimumSpacing: CGFloat = 10
-        let avatarsRowWidth = width - padding*2 - minimumSpacing*2
-        let itemWidth = avatarsRowWidth / 3
-        
-        let flowlayout = UICollectionViewFlowLayout()
-        flowlayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowlayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-        
-        return flowlayout
-    }
-    
     func getFollowers() {
-        NetworkManager.shared.getFollowers(for: username, page: 1) { result in
+        NetworkManager.shared.getFollowers(for: username, page: 1) { [weak self] result in
+            guard let strongSelf = self else {return}
+            
             switch result {
             case .success(let followers):
-                self.followers = followers
-                self.updateCollectionData()
-                
+                strongSelf.followers = followers
+                strongSelf.updateCollectionData()
             case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
+                strongSelf.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
             }
         }
-    }
-    
-    enum Section {
-        case main
     }
     
     var followers = [Follower]()
     var username: String!
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    
+    enum Section { case main }
+    
 }
