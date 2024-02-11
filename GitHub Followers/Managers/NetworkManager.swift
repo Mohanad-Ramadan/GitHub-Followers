@@ -11,7 +11,7 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     private let baseURL = "https://api.github.com/users/"
-//    let cached = NSCache<NSObject, UIImage>()
+    let cache = NSCache<NSObject, UIImage>()
     
     private init() {
         
