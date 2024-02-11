@@ -23,7 +23,6 @@ class GFAvatarImageView: UIImageView {
     func downloadImage(from urlString: String) {
         if let imageCached = cache.object(forKey: urlString as NSObject){
             self.image = imageCached
-            print("cached")
             return
         }
         
@@ -38,9 +37,11 @@ class GFAvatarImageView: UIImageView {
             self.cache.setObject(image, forKey:  urlString as NSObject)
             
             DispatchQueue.main.async {self.image = image}
-            print("fetched")
+            
         }
+        
         task.resume()
+        
     }
     
     let cache = NetworkManager.shared.cache
