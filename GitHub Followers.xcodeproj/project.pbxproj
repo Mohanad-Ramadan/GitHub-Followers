@@ -10,6 +10,7 @@
 		14001C932B771B38009AF475 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14001C922B771B38009AF475 /* FollowerCell.swift */; };
 		14001C952B771D9B009AF475 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14001C942B771D9B009AF475 /* GFAvatarImageView.swift */; };
 		1435BC852B7B3B4E00F4B689 /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BC842B7B3B4E00F4B689 /* GFEmptyStateView.swift */; };
+		1435BC872B7B512900F4B689 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BC862B7B512900F4B689 /* UserInfoVC.swift */; };
 		143EE2452B72FE76001FB7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EE2442B72FE76001FB7B0 /* AppDelegate.swift */; };
 		143EE2472B72FE76001FB7B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EE2462B72FE76001FB7B0 /* SceneDelegate.swift */; };
 		143EE2492B72FE76001FB7B0 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EE2482B72FE76001FB7B0 /* SearchVC.swift */; };
@@ -35,6 +36,7 @@
 		14001C922B771B38009AF475 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		14001C942B771D9B009AF475 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		1435BC842B7B3B4E00F4B689 /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
+		1435BC862B7B512900F4B689 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		143EE2412B72FE76001FB7B0 /* GitHub Followers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub Followers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		143EE2442B72FE76001FB7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		143EE2462B72FE76001FB7B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				14E4ED392B73E9B500B76DAD /* FollowersListVC.swift */,
 				143EE25A2B730A3E001FB7B0 /* FavoritesListVC.swift */,
 				148D35762B748A7900B3BFBA /* GFAlertVC.swift */,
+				1435BC862B7B512900F4B689 /* UserInfoVC.swift */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				143EE25B2B730A3E001FB7B0 /* FavoritesListVC.swift in Sources */,
 				148D35772B748A7900B3BFBA /* GFAlertVC.swift in Sources */,
 				148D35822B74B57D00B3BFBA /* User.swift in Sources */,
+				1435BC872B7B512900F4B689 /* UserInfoVC.swift in Sources */,
 				148D35792B7497BC00B3BFBA /* ViewController-EXT.swift in Sources */,
 				148D357F2B74B4FB00B3BFBA /* Follower.swift in Sources */,
 				143EE2592B7309B4001FB7B0 /* MainTabBarController.swift in Sources */,
