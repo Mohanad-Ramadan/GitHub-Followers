@@ -14,8 +14,8 @@ class GFAvatarImageView: UIImageView {
     }
     
     private func configure() {
-        layer.cornerCurve = .continuous
         image = UIImage(resource: .avatarPlaceholder)
+        layer.cornerRadius = 10
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
     }
