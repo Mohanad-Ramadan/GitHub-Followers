@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FollowerListVCDelegate: AnyObject{
+    func newFollowersRequested(username: String)
+}
+
 class FollowersListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,9 +70,12 @@ class FollowersListVC: UIViewController {
         showLoadingView()
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else {return}
+            
             dissmisLoadingView()
+            
             switch result {
             case .success(let followers):
+                
                 if followers.count < 100 { thereIsMoreFollowers = false }
                 self.followers.append(contentsOf: followers)
                 
@@ -80,6 +87,7 @@ class FollowersListVC: UIViewController {
                 }
                     
                 self.updateCollectionData(with: self.followers)
+                
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
             }
@@ -119,6 +127,8 @@ extension FollowersListVC: UICollectionViewDelegate {
         
         let vc = UserInfoVC()
         vc.username = follower.login
+        vc.delegate = self
+        
         let navToVC = UINavigationController(rootViewController: vc)
         present(navToVC, animated: true)
     }
@@ -139,4 +149,18 @@ extension FollowersListVC: UISearchBarDelegate ,UISearchResultsUpdating {
         updateCollectionData(with: followers)
         isStillSearching = false
     }
+}
+
+
+extension FollowersListVC: FollowerListVCDelegate{
+    func newFollowersRequested(username: String) {
+        self.username = username
+        title = username
+        followers.removeAll()
+        searchedFollowers.removeAll()
+        getFollowers(page: 1)
+        
+        collectionView.scrollToItem(at: .init(row: 0, section: 0), at: .top, animated: true)
+    }
+    
 }

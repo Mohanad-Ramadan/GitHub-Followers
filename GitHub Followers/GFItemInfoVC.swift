@@ -13,6 +13,7 @@ class GFItemInfoVC: UIViewController {
         super.viewDidLoad()
         configureVC()
         configureViews()
+        configureButtonAction()
     }
     
     init(user: User!) {
@@ -46,7 +47,12 @@ class GFItemInfoVC: UIViewController {
             actionButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
+    
+    func configureButtonAction() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+    }
 
+    @objc func actionButtonTapped() {}
     
     let stackView: UIStackView = {
         let stack = UIStackView()
@@ -60,7 +66,7 @@ class GFItemInfoVC: UIViewController {
     let actionButton = GFButton()
     
     var user: User!
-    
+    weak var delegate: UserInfoVCDelegate!
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

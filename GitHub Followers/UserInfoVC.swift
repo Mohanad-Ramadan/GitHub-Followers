@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol UserInfoVCDelegate: AnyObject{
+    func githubProfilDidTapped(user: User)
+    func getFollowersDidTapped(user: User)
+}
+
 class UserInfoVC: UIViewController {
 
     override func viewDidLoad() {
@@ -22,11 +27,7 @@ class UserInfoVC: UIViewController {
             
             switch result {
             case .success(let user):
-                DispatchQueue.main.async {
-                    self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
-                    self.add(childVC: GFRepoItemVC(user: user), to: self.itemViewOne)
-                    self.add(childVC: GFFollowerItemVC(user: user), to: self.itemViewTwo)
-                }
+                DispatchQueue.main.async { self.configureChildVCs(user: user) }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
             }
@@ -38,15 +39,26 @@ class UserInfoVC: UIViewController {
         let doneNavButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneNavButton
     }
-    
     @objc func dismissVC() {
         dismiss(animated: true)
     }
     
+    private func configureChildVCs(user: User) {
+        self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
+        
+        let repoItemVC = GFRepoItemVC(user: user)
+        repoItemVC.delegate = self
+        self.add(childVC: repoItemVC, to: self.itemViewOne)
+        
+        let followerItemVC = GFFollowerItemVC(user: user)
+        followerItemVC.delegate = self
+        self.add(childVC: followerItemVC, to: self.itemViewTwo)
+    }
+    
     func configureViews() {
-        [ headerView, itemViewOne, itemViewTwo ].forEach { vcView in
-            view.addSubview(vcView)
-            vcView.translatesAutoresizingMaskIntoConstraints = false
+        [ headerView, itemViewOne, itemViewTwo ].forEach { vcElement in
+            view.addSubview(vcElement)
+            vcElement.translatesAutoresizingMaskIntoConstraints = false
         }
         
         let padding:CGFloat = 20
@@ -82,5 +94,23 @@ class UserInfoVC: UIViewController {
     let itemViewTwo = UIView()
 
     var username: String!
+    weak var delegate: FollowerListVCDelegate!
+    
+}
+
+extension UserInfoVC: UserInfoVCDelegate{
+    func githubProfilDidTapped(user: User) {
+        presentToSafariVC(url: user.htmlUrl)
+    }
+    
+    func getFollowersDidTapped(user: User) {
+        guard user.followers != 0 else {
+            presentGFAlertOnMainThread(alertTitle: "No followers", messageText: "This user has no followers. What a shame 😞.", buttonTitle: "So sad")
+            return
+        }
+        delegate.newFollowersRequested(username: user.login)
+        dismissVC()
+    }
+    
     
 }

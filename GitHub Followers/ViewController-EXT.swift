@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 fileprivate var containerView : UIView!
 
@@ -64,6 +65,17 @@ extension UIViewController {
         let emptyStateView = GFEmptyStateView(message: message)
         emptyStateView.frame = superView.bounds
         superView.addSubview(emptyStateView)
+    }
+    
+    func presentToSafariVC(url urlString: String) {
+        guard let url = URL(string: urlString) else {
+            presentGFAlertOnMainThread(alertTitle: "Invalid URL", messageText: "The site you are trying to reach is invalid", buttonTitle: "OK")
+            return
+        }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredControlTintColor = .accent
+        safariVC.modalPresentationStyle = .formSheet
+        present(safariVC, animated: true)
     }
     
 }
