@@ -22,7 +22,11 @@ class UserInfoVC: UIViewController {
             
             switch result {
             case .success(let user):
-                DispatchQueue.main.async { self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView) }
+                DispatchQueue.main.async {
+                    self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
+                    self.add(childVC: GFRepoItemVC(user: user), to: self.itemViewOne)
+                    self.add(childVC: GFFollowerItemVC(user: user), to: self.itemViewTwo)
+                }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
             }
@@ -44,9 +48,6 @@ class UserInfoVC: UIViewController {
             view.addSubview(vcView)
             vcView.translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        itemViewOne.backgroundColor = .systemGray
-        itemViewTwo.backgroundColor = .systemBlue
         
         let padding:CGFloat = 20
         let itemHeight:CGFloat = 140

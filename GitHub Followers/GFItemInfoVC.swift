@@ -15,6 +15,11 @@ class GFItemInfoVC: UIViewController {
         configureViews()
     }
     
+    init(user: User!) {
+        super.init(nibName: nil, bundle: nil)
+        self.user = user
+    }
+    
     private func configureVC() {
         view.backgroundColor = .secondarySystemBackground
         view.layer.cornerRadius = 18
@@ -42,6 +47,7 @@ class GFItemInfoVC: UIViewController {
         ])
     }
 
+    
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -53,4 +59,11 @@ class GFItemInfoVC: UIViewController {
     let itemInfoViewTwo = GFItemInfoView()
     let actionButton = GFButton()
     
+    var user: User!
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+ 
 }
