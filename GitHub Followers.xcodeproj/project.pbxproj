@@ -32,6 +32,7 @@
 		148D35842B74B93100B3BFBA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D35832B74B93100B3BFBA /* NetworkManager.swift */; };
 		148D35882B74C41700B3BFBA /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D35872B74C41700B3BFBA /* ErrorMessages.swift */; };
 		14E4ED3A2B73E9B500B76DAD /* FollowersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4ED392B73E9B500B76DAD /* FollowersListVC.swift */; };
+		14E8F34F2B7C9BD000B801CB /* GFItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8F34E2B7C9BD000B801CB /* GFItemInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		148D35832B74B93100B3BFBA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		148D35872B74C41700B3BFBA /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		14E4ED392B73E9B500B76DAD /* FollowersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersListVC.swift; sourceTree = "<group>"; };
+		14E8F34E2B7C9BD000B801CB /* GFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				1435BC842B7B3B4E00F4B689 /* GFEmptyStateView.swift */,
+				14E8F34E2B7C9BD000B801CB /* GFItemInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				142983BC2B7B819C00F0D157 /* GFSecondaryTitleLabel.swift in Sources */,
 				14E4ED3A2B73E9B500B76DAD /* FollowersListVC.swift in Sources */,
 				143EE25D2B731BEF001FB7B0 /* GFButton.swift in Sources */,
+				14E8F34F2B7C9BD000B801CB /* GFItemInfoView.swift in Sources */,
 				143EE25B2B730A3E001FB7B0 /* FavoritesListVC.swift in Sources */,
 				148D35772B748A7900B3BFBA /* GFAlertVC.swift in Sources */,
 				148D35822B74B57D00B3BFBA /* User.swift in Sources */,
