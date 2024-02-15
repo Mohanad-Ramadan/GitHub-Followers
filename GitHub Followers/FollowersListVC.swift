@@ -29,6 +29,35 @@ class FollowersListVC: UIViewController {
     func configureVC() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFavorite))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func addFavorite() {
+        showLoadingView()
+        
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else {return}
+            self.dissmisLoadingView()
+            
+            switch result {
+            case .success(let user):
+                let selectedUser = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                
+                PresistenceManager.updateFavoritesWith(action: PresistenceActionType.add, user: selectedUser) { error in
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(alertTitle: "Done!", messageText: "This user is added to your favorites", buttonTitle: "Ok")
+                        return
+                    }
+                    self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "Ok")
+                }
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "Ok")
+            }
+        }
+        
+       
     }
     
     func configureCollectionView(){
@@ -75,7 +104,6 @@ class FollowersListVC: UIViewController {
             
             switch result {
             case .success(let followers):
-                
                 if followers.count < 100 { thereIsMoreFollowers = false }
                 self.followers.append(contentsOf: followers)
                 
@@ -105,11 +133,13 @@ class FollowersListVC: UIViewController {
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
+    
     enum Section { case main }
     
 }
 
 
+//MARK: - CollectionView Delegate
 extension FollowersListVC: UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let scrollOffest = scrollView.contentOffset.y + view.frame.height
@@ -136,7 +166,7 @@ extension FollowersListVC: UICollectionViewDelegate {
     
 }
 
-
+//MARK: - Search Delegates
 extension FollowersListVC: UISearchBarDelegate ,UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {updateCollectionData(with: followers); return}
@@ -152,6 +182,7 @@ extension FollowersListVC: UISearchBarDelegate ,UISearchResultsUpdating {
 }
 
 
+//MARK: - GFItemInfo Delegates
 extension FollowersListVC: FollowerListVCDelegate{
     func newFollowersRequested(username: String) {
         self.username = username
