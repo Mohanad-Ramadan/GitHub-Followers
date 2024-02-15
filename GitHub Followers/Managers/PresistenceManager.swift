@@ -20,7 +20,7 @@ enum PresistenceManager {
     }
     
     static func retrieveFavorites(completion: @escaping (Result<[Follower], GFError>) -> Void) {
-        guard let retrievedFavorites = defualt.object(forKey: Keys.favoriteToDefualt) as? Data else {
+        guard let retrievedFavorites = defualt.data(forKey: Keys.favoriteToDefualt) else {
             completion(.success([]))
             return
         }
