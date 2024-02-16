@@ -11,7 +11,7 @@ class FavoriteCell: UITableViewCell {
     static let identifier = "FavoriteCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: restorationIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
     }
 
