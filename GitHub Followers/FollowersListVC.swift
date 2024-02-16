@@ -45,7 +45,7 @@ class FollowersListVC: UIViewController {
             case .success(let user):
                 let selectedUser = Follower(login: user.login, avatarUrl: user.avatarUrl)
                 
-                PresistenceManager.updateFavoritesWith(action: PresistenceActionType.add, user: selectedUser) { error in
+                PresistenceManager.updateFavoritesWith(action: .add, user: selectedUser) { error in
                     guard let error = error else {
                         self.presentGFAlertOnMainThread(alertTitle: "Done!", messageText: "This user is added to your favorites", buttonTitle: "Ok")
                         return
