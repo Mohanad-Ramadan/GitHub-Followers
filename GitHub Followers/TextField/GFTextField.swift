@@ -25,7 +25,6 @@ class GFTextField: UITextField {
         adjustsFontSizeToFitWidth = true
         minimumFontSize = 12
         placeholder = "username"
-        text = "SAllen0400"
         
         backgroundColor = .tertiarySystemBackground
         autocorrectionType = .no

@@ -76,15 +76,7 @@ class GFAlertVC: UIViewController {
     }
     
     
-    let containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
-        view.layer.cornerRadius = 16
-        view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.white.cgColor
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let containerView = GFAlertContainerView()
     
     let padding:CGFloat = 20
     

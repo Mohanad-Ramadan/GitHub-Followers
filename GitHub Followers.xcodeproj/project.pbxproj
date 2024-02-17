@@ -39,6 +39,7 @@
 		14E8F3562B7CD38000B801CB /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8F3552B7CD38000B801CB /* GFRepoItemVC.swift */; };
 		14E8F3582B7CD66300B801CB /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8F3572B7CD66300B801CB /* GFFollowerItemVC.swift */; };
 		14F6350C2B80AB2B001A3D84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6350B2B80AB2B001A3D84 /* Constants.swift */; };
+		14F6350E2B80BB1A001A3D84 /* GFAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6350D2B80BB1A001A3D84 /* GFAlertContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		14E8F3552B7CD38000B801CB /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
 		14E8F3572B7CD66300B801CB /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
 		14F6350B2B80AB2B001A3D84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		14F6350D2B80BB1A001A3D84 /* GFAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			children = (
 				1435BC842B7B3B4E00F4B689 /* GFEmptyStateView.swift */,
 				14E8F34E2B7C9BD000B801CB /* GFItemInfoView.swift */,
+				14F6350D2B80BB1A001A3D84 /* GFAlertContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				1435BC852B7B3B4E00F4B689 /* GFEmptyStateView.swift in Sources */,
 				142983BC2B7B819C00F0D157 /* GFSecondaryTitleLabel.swift in Sources */,
 				14E4ED3A2B73E9B500B76DAD /* FollowersListVC.swift in Sources */,
+				14F6350E2B80BB1A001A3D84 /* GFAlertContainerView.swift in Sources */,
 				143EE25D2B731BEF001FB7B0 /* GFButton.swift in Sources */,
 				14E8F3582B7CD66300B801CB /* GFFollowerItemVC.swift in Sources */,
 				14E8F34F2B7C9BD000B801CB /* GFItemInfoView.swift in Sources */,
