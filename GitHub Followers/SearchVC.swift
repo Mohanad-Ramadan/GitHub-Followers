@@ -20,11 +20,12 @@ class SearchVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        usernameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func dismissKeyboardTapGuster() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
     
@@ -34,24 +35,27 @@ class SearchVC: UIViewController {
             return
         }
         
-        let followersVC = FollowersListVC()
-        followersVC.username = usernameTextField.text
-        followersVC.title = usernameTextField.text
+        let followersVC = FollowersListVC(username: usernameTextField.text)
         navigationController?.pushViewController(followersVC, animated: true)
+        
+        usernameTextField.resignFirstResponder()
     }
     
     private func configureViews() {
         view.addSubview(logoImageView)
+        
         view.addSubview(usernameTextField)
         usernameTextField.delegate = self
-        view.addSubview(callToActionButton)
         
+        view.addSubview(callToActionButton)
         callToActionButton.addTarget(self, action: #selector(pushToFollowersListVC), for: .touchUpInside)
     }
     
     func applyConstraints(){
+        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
+        
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 200),
             logoImageView.widthAnchor.constraint(equalToConstant: 200),

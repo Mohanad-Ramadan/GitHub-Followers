@@ -38,6 +38,7 @@
 		14E8F3522B7CA1AA00B801CB /* GFItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8F3512B7CA1AA00B801CB /* GFItemInfoVC.swift */; };
 		14E8F3562B7CD38000B801CB /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8F3552B7CD38000B801CB /* GFRepoItemVC.swift */; };
 		14E8F3582B7CD66300B801CB /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8F3572B7CD66300B801CB /* GFFollowerItemVC.swift */; };
+		14F6350C2B80AB2B001A3D84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6350B2B80AB2B001A3D84 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		14E8F3512B7CA1AA00B801CB /* GFItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoVC.swift; sourceTree = "<group>"; };
 		14E8F3552B7CD38000B801CB /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
 		14E8F3572B7CD66300B801CB /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
+		14F6350B2B80AB2B001A3D84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +240,7 @@
 			children = (
 				148D35872B74C41700B3BFBA /* ErrorMessages.swift */,
 				148D315B2B786E9400234292 /* UIHelper.swift */,
+				14F6350B2B80AB2B001A3D84 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				143EE2492B72FE76001FB7B0 /* SearchVC.swift in Sources */,
 				142983BA2B7B80A000F0D157 /* GFUserInfoHeaderVC.swift in Sources */,
 				14001C932B771B38009AF475 /* FollowerCell.swift in Sources */,
+				14F6350C2B80AB2B001A3D84 /* Constants.swift in Sources */,
 				143EE2452B72FE76001FB7B0 /* AppDelegate.swift in Sources */,
 				14E8F3522B7CA1AA00B801CB /* GFItemInfoVC.swift in Sources */,
 				1435BC852B7B3B4E00F4B689 /* GFEmptyStateView.swift in Sources */,

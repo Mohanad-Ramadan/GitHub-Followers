@@ -48,7 +48,7 @@ class FavoritesListVC: UIViewController {
                         self.view.bringSubviewToFront(self.favoriteTable)
                     }
                 }
-            case .failure(let failure):
+            case .failure(_):
                 self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: "Something went wrong.", buttonTitle: "Ok")
             }
         }
@@ -80,9 +80,7 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favorites[indexPath.row]
-        let vc = FollowersListVC()
-        vc.username = favorite.login
-        vc.title = favorite.login
+        let vc = FollowersListVC(username: favorite.login)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -96,7 +94,7 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
         PresistenceManager.updateFavoritesWith(action: .remove, user: favorite) { [weak self] error in
             guard let self = self else {return}
             
-            guard let error = error else {return}
+            guard error != nil else {return}
             self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: "Unable to remove the favorite", buttonTitle: "OK")
         }
     }
