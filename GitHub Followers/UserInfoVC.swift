@@ -53,10 +53,12 @@ class UserInfoVC: UIViewController {
         let followerItemVC = GFFollowerItemVC(user: user)
         followerItemVC.delegate = self
         self.add(childVC: followerItemVC, to: self.itemViewTwo)
+        
+        self.dateLabel.text = "Github since \(user.createdAt.formatted(.dateTime.year().month(.abbreviated)))"
     }
     
     func configureViews() {
-        [ headerView, itemViewOne, itemViewTwo ].forEach { vcElement in
+        [ headerView, itemViewOne, itemViewTwo, dateLabel ].forEach { vcElement in
             view.addSubview(vcElement)
             vcElement.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -78,7 +80,12 @@ class UserInfoVC: UIViewController {
             itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
             itemViewTwo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             itemViewTwo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight)
+            itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -92,6 +99,7 @@ class UserInfoVC: UIViewController {
     let headerView = UIView()
     let itemViewOne = UIView()
     let itemViewTwo = UIView()
+    let dateLabel = GFBodyLabel(textAlignment: .center)
 
     var username: String!
     weak var delegate: FollowerListVCDelegate!
