@@ -7,11 +7,20 @@
 
 import UIKit
 
+protocol GFFollowerItemVCDelegate: AnyObject {
+    func getFollowersDidTapped(for user: User)
+}
+
 class GFFollowerItemVC: GFItemInfoVC{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureItems()
+    }
+    
+    init(for user: User, delegate: GFFollowerItemVCDelegate) {
+        super.init(user: user)
+        self.delegate = delegate
     }
     
     private func configureItems() {
@@ -21,11 +30,14 @@ class GFFollowerItemVC: GFItemInfoVC{
     }
     
     override func actionButtonTapped() {
-        delegate.getFollowersDidTapped(user: user)
+        delegate.getFollowersDidTapped(for: user)
     }
     
-//    func forceIgnorButton() {
-//        actionButton.
-//    }
-
+    
+    weak var delegate: GFFollowerItemVCDelegate!
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

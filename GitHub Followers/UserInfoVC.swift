@@ -8,8 +8,7 @@
 import UIKit
 
 protocol UserInfoVCDelegate: AnyObject{
-    func githubProfilDidTapped(user: User)
-    func getFollowersDidTapped(user: User)
+    func newFollowersRequested(username: String)
 }
 
 class UserInfoVC: UIViewController {
@@ -45,14 +44,8 @@ class UserInfoVC: UIViewController {
     
     private func configureChildVCs(user: User) {
         self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
-        
-        let repoItemVC = GFRepoItemVC(user: user)
-        repoItemVC.delegate = self
-        self.add(childVC: repoItemVC, to: self.itemViewOne)
-        
-        let followerItemVC = GFFollowerItemVC(user: user)
-        followerItemVC.delegate = self
-        self.add(childVC: followerItemVC, to: self.itemViewTwo)
+        self.add(childVC: GFRepoItemVC(for: user, delegate: self), to: self.itemViewOne)
+        self.add(childVC: GFFollowerItemVC(for: user, delegate: self), to: self.itemViewTwo)
         
         self.dateLabel.text = "Github since \(user.createdAt.formatted(.dateTime.year().month(.abbreviated)))"
     }
@@ -102,16 +95,20 @@ class UserInfoVC: UIViewController {
     let dateLabel = GFBodyLabel(textAlignment: .center)
 
     var username: String!
-    weak var delegate: FollowerListVCDelegate!
+    
+    weak var delegate: UserInfoVCDelegate!
     
 }
 
-extension UserInfoVC: UserInfoVCDelegate{
-    func githubProfilDidTapped(user: User) {
+
+extension UserInfoVC: GFRepoItemVCDelegate{
+    func githubProfilDidTapped(for user: User) {
         presentToSafariVC(url: user.htmlUrl)
     }
-    
-    func getFollowersDidTapped(user: User) {
+}
+
+extension UserInfoVC: GFFollowerItemVCDelegate{
+    func getFollowersDidTapped(for user: User) {
         guard user.followers != 0 else {
             presentGFAlertOnMainThread(alertTitle: "No followers", messageText: "This user has no followers. What a shame 😞.", buttonTitle: "So sad")
             return
@@ -119,6 +116,4 @@ extension UserInfoVC: UserInfoVCDelegate{
         delegate.newFollowersRequested(username: user.login)
         dismissVC()
     }
-    
-    
 }

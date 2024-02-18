@@ -66,7 +66,7 @@ class GFItemInfoVC: UIViewController {
     let actionButton = GFButton()
     
     var user: User!
-    weak var delegate: UserInfoVCDelegate!
+//    weak var delegate: GFItemInfoVCDelegate!
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

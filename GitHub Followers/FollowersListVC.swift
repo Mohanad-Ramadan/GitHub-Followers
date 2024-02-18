@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol FollowerListVCDelegate: AnyObject{
-    func newFollowersRequested(username: String)
-}
 
 class FollowersListVC: UIViewController {
     override func viewDidLoad() {
@@ -134,6 +131,7 @@ class FollowersListVC: UIViewController {
     var followers = [Follower]()
     var searchedFollowers = [Follower]()
     var isStillSearching = false
+    var isLoadingMoreFollowers = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -154,7 +152,7 @@ extension FollowersListVC: UICollectionViewDelegate {
         let scrollOffest = scrollView.contentOffset.y + view.frame.height
         let contentOffest = scrollView.contentSize.height
         
-        if scrollOffest > contentOffest, thereIsMoreFollowers {
+        if scrollOffest > contentOffest, thereIsMoreFollowers, !isLoadingMoreFollowers {
             currentFollowerPage += 1
             getFollowers(page: currentFollowerPage)
         }
@@ -192,7 +190,7 @@ extension FollowersListVC: UISearchResultsUpdating {
 
 
 //MARK: - GFItemInfo Delegates
-extension FollowersListVC: FollowerListVCDelegate{
+extension FollowersListVC: UserInfoVCDelegate{
     func newFollowersRequested(username: String) {
         self.username = username
         title = username
