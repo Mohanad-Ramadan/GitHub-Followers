@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UIHelper {
+enum UIHelper {
     
     static func collectionThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
         let width = view.bounds.width
