@@ -50,9 +50,7 @@ enum PresistenceManager {
         
         retrieveFavorites { result in
             switch result {
-            case .success(let retrievedFavorites):
-                var allFavorites = retrievedFavorites
-                
+            case .success(var allFavorites):
                 switch action {
                 case .add:
                     guard !allFavorites.contains(selectedUser) else {
@@ -62,10 +60,10 @@ enum PresistenceManager {
                     allFavorites.append(selectedUser)
                 case .remove:
                     allFavorites.removeAll { $0.login == selectedUser.login}
+                    
                 }
                 
                 completion(save(favorite: allFavorites))
-
             case .failure(_):
                 completion(.unableToFavorite)
             }
