@@ -12,8 +12,9 @@ class GFUserInfoHeaderVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        configureViews()
+        [avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel].forEach {view.addSubview($0)}
         configureViewsElements()
+        applyConstraints()
     }
     
     init(user: User!) {
@@ -21,20 +22,8 @@ class GFUserInfoHeaderVC: UIViewController {
         self.user = user
     }
     
-    func configureViews() {
-        [avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel]
-            .forEach {view.addSubview($0)}
-        applyConstraints()
-    }
-    
     func configureViewsElements() {
-        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
-            guard let self = self else {return}
-            DispatchQueue.main.async {
-                self.avatarImageView.image = image
-            }
-        }
-        
+        avatarImageView.downloadImageFrom(user.avatarUrl)
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "Unknown"
         locationLabel.text = user.location ?? "Unknown location"

@@ -46,21 +46,53 @@ class FollowersListVC: UIViewController {
             
             switch result {
             case .success(let user):
-                let selectedUser = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                
-                PresistenceManager.updateFavoritesWith(action: .add, user: selectedUser) { error in
-                    guard let error = error else {
-                        self.presentGFAlertOnMainThread(alertTitle: "Done!", messageText: "This user is added to your favorites", buttonTitle: "Ok")
-                        return
-                    }
-                    self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "Ok")
-                }
+                addToFavoriteWith(user)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "Ok")
             }
         }
         
-       
+        func addToFavoriteWith(_ user: User){
+            let selectedUser = Follower(login: user.login, avatarUrl: user.avatarUrl)
+            
+            PresistenceManager.updateFavoritesWith(action: .add, user: selectedUser) { error in
+                guard let error = error else {
+                    self.presentGFAlertOnMainThread(alertTitle: "Done!", messageText: "This user is added to your favorites", buttonTitle: "Ok")
+                    return
+                }
+                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "Ok")
+            }
+        }
+    }
+    
+    
+    func getFollowers(page: Int) {
+        showLoadingView()
+        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
+            guard let self = self else {return}
+            
+            dissmisLoadingView()
+            
+            switch result {
+            case .success(let followers):
+                updateFollowersWith(followers)
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
+            }
+        }
+        
+        func updateFollowersWith(_ followers: [Follower]){
+            if followers.count < 100 { thereIsMoreFollowers = false }
+            self.followers.append(contentsOf: followers)
+            
+            if self.followers.isEmpty {
+                DispatchQueue.main.async {
+                    self.showEmptyStateView(with: "This user hasn't any followers. Go follow them 😅.", superView: self.view)
+                }
+                return
+            }
+            self.updateCollectionData(with: self.followers)
+        }
     }
     
     func configureCollectionView(){
@@ -94,33 +126,6 @@ class FollowersListVC: UIViewController {
         snapShot.appendItems(followers)
         DispatchQueue.main.async {
             self.dataSource.apply(snapShot, animatingDifferences: true)
-        }
-    }
-    
-    func getFollowers(page: Int) {
-        showLoadingView()
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else {return}
-            
-            dissmisLoadingView()
-            
-            switch result {
-            case .success(let followers):
-                if followers.count < 100 { thereIsMoreFollowers = false }
-                self.followers.append(contentsOf: followers)
-                
-                if self.followers.isEmpty {
-                    DispatchQueue.main.async {
-                        self.showEmptyStateView(with: "This user hasn't any followers. Go follow them 😅.", superView: self.view)
-                    }
-                    return
-                }
-                    
-                self.updateCollectionData(with: self.followers)
-                
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
-            }
         }
     }
 

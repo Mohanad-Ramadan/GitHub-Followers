@@ -39,19 +39,24 @@ class FavoritesListVC: UIViewController {
             
             switch favorites {
             case .success(let favorites):
-                if favorites.isEmpty{
-                    showEmptyStateView(with: "No Favorites added yet.", superView: view.self)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        self.favoriteTable.reloadData()
-                        self.view.bringSubviewToFront(self.favoriteTable)
-                    }
-                }
+                updateFavoriteListWith(favorites)
             case .failure(_):
                 self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: "Something went wrong.", buttonTitle: "Ok")
             }
         }
+        
+        func updateFavoriteListWith(_ favorites: [Follower]) {
+            if favorites.isEmpty{
+                showEmptyStateView(with: "No Favorites added yet.", superView: view.self)
+            } else {
+                self.favorites = favorites
+                DispatchQueue.main.async {
+                    self.favoriteTable.reloadData()
+                    self.view.bringSubviewToFront(self.favoriteTable)
+                }
+            }
+        }
+        
     }
     
     private let favoriteTable: UITableView = {
