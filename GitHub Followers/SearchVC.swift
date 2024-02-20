@@ -78,11 +78,13 @@ class SearchVC: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
     let usernameTextField = GFTextField()
-    var isUsernameEnterd: Bool {return !usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty}
-    
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    
+    var isUsernameEnterd: Bool {
+        return !usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
 }
 
 

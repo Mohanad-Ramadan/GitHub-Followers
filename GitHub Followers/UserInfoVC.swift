@@ -16,6 +16,7 @@ class UserInfoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
+        configureContentViews()
         configureViews()
         fetchUserInfo()
     }
@@ -33,11 +34,6 @@ class UserInfoVC: UIViewController {
         }
     }
     
-    func configureVC() {
-        view.backgroundColor = .systemBackground
-        let doneNavButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
-        navigationItem.rightBarButtonItem = doneNavButton
-    }
     @objc func dismissVC() {
         dismiss(animated: true)
     }
@@ -50,9 +46,37 @@ class UserInfoVC: UIViewController {
         self.dateLabel.text = "Github since \(user.createdAt.formatted(.dateTime.year().month(.abbreviated)))"
     }
     
+    func configureVC() {
+        view.backgroundColor = .systemBackground
+        let doneNavButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        navigationItem.rightBarButtonItem = doneNavButton
+    }
+    
+    func configureContentViews() {
+        [scrollView, contentView].forEach {$0.translatesAutoresizingMaskIntoConstraints = false}
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 600)
+        ])
+        
+    }
+    
     func configureViews() {
         [ headerView, itemViewOne, itemViewTwo, dateLabel ].forEach { vcElement in
-            view.addSubview(vcElement)
+            contentView.addSubview(vcElement)
             vcElement.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -60,7 +84,7 @@ class UserInfoVC: UIViewController {
         let itemHeight:CGFloat = 140
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             headerView.heightAnchor.constraint(equalToConstant: 180),
@@ -93,6 +117,8 @@ class UserInfoVC: UIViewController {
     let itemViewOne = UIView()
     let itemViewTwo = UIView()
     let dateLabel = GFBodyLabel(textAlignment: .center)
+    let contentView = UIView()
+    let scrollView = UIScrollView()
 
     var username: String!
     
