@@ -37,7 +37,7 @@ class GFAlertVC: UIViewController {
         
         //actionButton config
         containerView.addSubview(actionButton)
-        actionButton.setTitle(buttonTitle ?? "OK", for: .normal)
+        actionButton.configuration?.title = buttonTitle
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
     }
@@ -86,7 +86,7 @@ class GFAlertVC: UIViewController {
     let messageLabel = GFBodyLabel(textAlignment: .center)
     var messageText: String?
     
-    let actionButton = GFButton(backgroundColor: .accent, title: "OK")
+    let actionButton = GFButton(color: .accent, title: "OK")
     var buttonTitle: String?
     
     required init?(coder: NSCoder) {

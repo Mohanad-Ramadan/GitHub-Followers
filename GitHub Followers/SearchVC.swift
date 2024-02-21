@@ -79,7 +79,7 @@ class SearchVC: UIViewController {
         return imageView
     }()
     let usernameTextField = GFTextField()
-    let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    let callToActionButton = GFButton(color: .systemGreen, title: "Get Followers")
     
     var isUsernameEnterd: Bool {
         return !usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
