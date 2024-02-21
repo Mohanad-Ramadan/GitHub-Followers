@@ -29,7 +29,7 @@ class UserInfoVC: UIViewController {
             case .success(let user):
                 DispatchQueue.main.async { self.configureChildVCs(user: user) }
             case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
+                self.presentGFAlert(messageText: error.rawValue)
             }
         }
     }
@@ -136,7 +136,7 @@ extension UserInfoVC: GFRepoItemVCDelegate{
 extension UserInfoVC: GFFollowerItemVCDelegate{
     func getFollowersDidTapped(for user: User) {
         guard user.followers != 0 else {
-            presentGFAlertOnMainThread(alertTitle: "No followers", messageText: "This user has no followers. What a shame 😞.", buttonTitle: "So sad")
+            presentGFAlert(alertTitle: "No followers", messageText: "This user has no followers. What a shame 😞.", buttonTitle: "So sad")
             return
         }
         delegate.newFollowersRequested(username: user.login)

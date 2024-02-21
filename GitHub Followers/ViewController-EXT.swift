@@ -12,9 +12,9 @@ fileprivate var containerView : UIView!
 
 extension UIViewController {
     
-    func presentGFAlertOnMainThread(alertTitle: String, messageText: String, buttonTitle: String){
+    func presentGFAlert(alertTitle: String = "Opps!", messageText: String, buttonTitle: String = "OK"){
         DispatchQueue.main.async {
-            let alertVC = GFAlertVC(alertTitle: alertTitle, messageText: messageText, buttonTitle: buttonTitle)
+            let alertVC = GFAlertVC(alertTitle: alertTitle , messageText: messageText, buttonTitle: buttonTitle)
             alertVC.modalPresentationStyle = .overFullScreen
             alertVC.modalTransitionStyle = .crossDissolve
             self.present(alertVC, animated: true)
@@ -22,12 +22,14 @@ extension UIViewController {
     }
     
     func presentDefaultError() {
-        let alertVC = GFAlertVC(alertTitle: "Something Went Wrong",
-                                messageText: "We were unable to complete your task at this time. Please try again.",
-                                buttonTitle: "Ok")
-        alertVC.modalPresentationStyle  = .overFullScreen
-        alertVC.modalTransitionStyle    = .crossDissolve
-        present(alertVC, animated: true)
+        DispatchQueue.main.async {
+            let alertVC = GFAlertVC(alertTitle: "Something Went Wrong",
+                                    messageText: "We were unable to complete your task at this time. Please try again.",
+                                    buttonTitle: "Ok")
+            alertVC.modalPresentationStyle  = .overFullScreen
+            alertVC.modalTransitionStyle    = .crossDissolve
+            self.present(alertVC, animated: true)
+        }
     }
     
     func showLoadingView() {
@@ -69,7 +71,7 @@ extension UIViewController {
     
     func presentToSafariVC(url urlString: String) {
         guard let url = URL(string: urlString) else {
-            presentGFAlertOnMainThread(alertTitle: "Invalid URL", messageText: "The site you are trying to reach is invalid", buttonTitle: "OK")
+            presentGFAlert(alertTitle: "Invalid URL", messageText: "The site you are trying to reach is invalid", buttonTitle: "OK")
             return
         }
         let safariVC = SFSafariViewController(url: url)

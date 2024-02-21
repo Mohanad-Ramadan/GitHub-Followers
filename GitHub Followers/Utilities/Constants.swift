@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum DefaultAlert {
+    static let message = "We were unable to complete your task at that time. Please try again."
+}
+
 enum DeviceTypes {
     enum ScreenSize {
         static let width                = UIScreen.main.bounds.size.width

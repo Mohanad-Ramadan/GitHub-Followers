@@ -41,7 +41,7 @@ class FavoritesListVC: UIViewController {
             case .success(let favorites):
                 updateFavoriteListWith(favorites)
             case .failure(_):
-                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: "Something went wrong.", buttonTitle: "Ok")
+                self.presentGFAlert(messageText: "Something went wrong.")
             }
         }
         
@@ -101,7 +101,7 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
                 favoriteTable.deleteRows(at: [indexPath], with: .left)
                 return
             }
-            self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: "Unable to remove the favorite", buttonTitle: "OK")
+            self.presentGFAlert(messageText: "Unable to remove the favorite")
         }
     }
     

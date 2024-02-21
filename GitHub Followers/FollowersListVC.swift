@@ -48,7 +48,7 @@ class FollowersListVC: UIViewController {
             case .success(let user):
                 addToFavoriteWith(user)
             case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "Ok")
+                self.presentGFAlert(messageText: error.rawValue)
             }
         }
         
@@ -57,10 +57,10 @@ class FollowersListVC: UIViewController {
             
             PresistenceManager.updateFavoritesWith(action: .add, user: selectedUser) { error in
                 guard let error = error else {
-                    self.presentGFAlertOnMainThread(alertTitle: "Done!", messageText: "This user is added to your favorites", buttonTitle: "Ok")
+                    self.presentGFAlert(alertTitle: "Done!", messageText: "This user is added to your favorites")
                     return
                 }
-                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "Ok")
+                self.presentGFAlert(messageText: error.rawValue)
             }
         }
     }
@@ -68,16 +68,16 @@ class FollowersListVC: UIViewController {
     
     func getFollowers(page: Int) {
         showLoadingView()
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else {return}
-            
-            dissmisLoadingView()
-            
-            switch result {
-            case .success(let followers):
+        
+        Task{
+            do {
+                let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
+                dissmisLoadingView()
                 updateFollowersWith(followers)
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Opps!", messageText: error.rawValue, buttonTitle: "OK")
+            } catch {
+                dissmisLoadingView()
+                let errorMessage = (error as? GFError)?.rawValue ?? DefaultAlert.message
+                presentGFAlert(messageText: errorMessage)
             }
         }
         
