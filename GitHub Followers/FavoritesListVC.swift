@@ -35,7 +35,7 @@ class FavoritesListVC: UIViewController {
     
     private func getFavorites() {
         PresistenceManager.retrieveFavorites { [weak self] favorites in
-            guard let self = self else {return}
+            guard let self else {return}
             
             switch favorites {
             case .success(let favorites):
@@ -47,7 +47,7 @@ class FavoritesListVC: UIViewController {
         
         func updateFavoriteListWith(_ favorites: [Follower]) {
             if favorites.isEmpty{
-                showEmptyStateView(with: "No Favorites added yet.", superView: view.self)
+                showEmptyStateView(with: "No Favorites added yet.", superView: view)
             } else {
                 self.favorites = favorites
                 DispatchQueue.main.async {
@@ -94,11 +94,14 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
         guard editingStyle == .delete else {return}
         
         PresistenceManager.updateFavoritesWith(action: .remove, user: favorites[indexPath.row]) { [weak self] error in
-            guard let self = self else {return}
+            guard let self else {return}
             
             guard error != nil else {
                 self.favorites.remove(at: indexPath.row)
                 favoriteTable.deleteRows(at: [indexPath], with: .left)
+                if favorites.isEmpty {
+                    self.showEmptyStateView(with: "No Favorites added yet.", superView: view)
+                }
                 return
             }
             self.presentGFAlert(messageText: "Unable to remove the favorite")
