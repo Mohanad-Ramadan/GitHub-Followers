@@ -42,7 +42,7 @@ class FollowersListVC: UIViewController {
         
         NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
             guard let self = self else {return}
-            self.dissmisLoadingView()
+            self.dismissLoadingView()
             
             switch result {
             case .success(let user):
@@ -68,17 +68,23 @@ class FollowersListVC: UIViewController {
     
     func getFollowers(page: Int) {
         showLoadingView()
+        isLoadingMoreFollowers = true
+        
+        defer {
+            dismissLoadingView()
+            isLoadingMoreFollowers = false
+        }
         
         Task{
             do {
                 let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
-                dissmisLoadingView()
                 updateFollowersWith(followers)
+            } catch let error as GFError {
+                presentGFAlert(messageText: error.rawValue)
             } catch {
-                dissmisLoadingView()
-                let errorMessage = (error as? GFError)?.rawValue ?? DefaultAlert.message
-                presentGFAlert(messageText: errorMessage)
+                presentDefaultError()
             }
+            dismissLoadingView()
         }
         
         func updateFollowersWith(_ followers: [Follower]){
