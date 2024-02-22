@@ -40,16 +40,16 @@ class FollowersListVC: UIViewController {
     @objc func addFavorite() {
         showLoadingView()
         
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else {return}
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let user):
+        Task{
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: username)
                 addToFavoriteWith(user)
-            case .failure(let error):
-                self.presentGFAlert(messageText: error.rawValue)
+            }catch let error as GFError{
+                presentGFAlert(messageText: error.rawValue)
+            }catch {
+                presentDefaultError()
             }
+            dismissLoadingView()
         }
         
         func addToFavoriteWith(_ user: User){
@@ -70,11 +70,6 @@ class FollowersListVC: UIViewController {
         showLoadingView()
         isLoadingMoreFollowers = true
         
-        defer {
-            dismissLoadingView()
-            isLoadingMoreFollowers = false
-        }
-        
         Task{
             do {
                 let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
@@ -85,6 +80,7 @@ class FollowersListVC: UIViewController {
                 presentDefaultError()
             }
             dismissLoadingView()
+            isLoadingMoreFollowers = false
         }
         
         func updateFollowersWith(_ followers: [Follower]){

@@ -21,15 +21,16 @@ class UserInfoVC: UIViewController {
         fetchUserInfo()
     }
     
+    
     func fetchUserInfo() {
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else {return}
-            
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async { self.configureChildVCs(user: user) }
-            case .failure(let error):
-                self.presentGFAlert(messageText: error.rawValue)
+        Task{
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: username)
+                configureChildVCs(user: user)
+            }catch let error as GFError{
+                presentGFAlert(messageText: error.rawValue)
+            }catch {
+                presentDefaultError()
             }
         }
     }
