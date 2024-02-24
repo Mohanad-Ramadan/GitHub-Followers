@@ -37,6 +37,14 @@ class FollowersListVC: UIViewController {
         navigationItem.rightBarButtonItem = addButton
     }
     
+    func configureSearchController(){
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search for a username"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+    }
+    
     @objc func addFavorite() {
         showLoadingView()
         
@@ -89,7 +97,7 @@ class FollowersListVC: UIViewController {
             
             if self.followers.isEmpty {
                 DispatchQueue.main.async {
-                    self.showEmptyStateView(with: "This user hasn't any followers. Go follow them 😅.", superView: self.view)
+                    self.showEmptyStateViewWith(message: "This user hasn't any followers. Go follow them 😅.", superView: self.view)
                 }
                 return
             }
@@ -103,14 +111,6 @@ class FollowersListVC: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.identifier)
-    }
-    
-    func configureSearchController(){
-        let searchController = UISearchController()
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search for a username"
-        searchController.obscuresBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
     }
     
     func configureCollectionDataSource() {
@@ -203,6 +203,7 @@ extension FollowersListVC: UserInfoVCDelegate{
         title = username
         followers.removeAll()
         searchedFollowers.removeAll()
+        navigationItem.searchController?.searchBar.text = ""
         getFollowers(page: 1)
         
         collectionView.scrollToItem(at: .init(item: 0, section: 0), at: .top, animated: true)

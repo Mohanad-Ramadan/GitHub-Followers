@@ -47,7 +47,7 @@ class FavoritesListVC: UIViewController {
         
         func updateFavoriteListWith(_ favorites: [Follower]) {
             if favorites.isEmpty{
-                showEmptyStateView(with: "No Favorites added yet.", superView: view)
+                showEmptyStateViewWith(message: "No Favorites added yet.", superView: view)
             } else {
                 self.favorites = favorites
                 DispatchQueue.main.async {
@@ -100,7 +100,7 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
                 self.favorites.remove(at: indexPath.row)
                 favoriteTable.deleteRows(at: [indexPath], with: .left)
                 if favorites.isEmpty {
-                    self.showEmptyStateView(with: "No Favorites added yet.", superView: view)
+                    self.showEmptyStateViewWith(message: "No Favorites added yet.", superView: view)
                 }
                 return
             }
